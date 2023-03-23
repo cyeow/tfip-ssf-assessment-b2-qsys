@@ -28,6 +28,7 @@ public class QSysRestController {
         if(q == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).header("Content-Type", MediaType.APPLICATION_JSON_VALUE).body(svc.createErrorJson("Either the list is empty, or one or more items does not exist."));
         }
+
         return ResponseEntity.status(HttpStatus.OK).header("Content-Type", MediaType.APPLICATION_JSON_VALUE).body(q.toJSONString());
     }
 }

@@ -7,6 +7,7 @@ import java.util.Map;
 
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
+import jakarta.json.JsonObjectBuilder;
 
 public class Quotation {
 
@@ -44,9 +45,13 @@ public class Quotation {
     }
 
     public JsonObject toJSON() {
+        JsonObjectBuilder quotations = Json.createObjectBuilder();
+        this.getQuotations().keySet().stream().forEach(q -> quotations.add(q,this.getQuotations().get(q)));
+
+        // String quotationsString = this.getQuotations().keySet().stream().map(q -> "\"" + q + "\" : " + this.getQuotations().get(q)).collect(Collectors.joining(", ", "[", "]"));
         return Json.createObjectBuilder()
-        .add("quoteId", quoteId)
-        .add("quotations", quotations.toString())
+        .add("quoteId", this.getQuoteId())
+        .add("quotations", quotations)
         .build();
     }
 }
